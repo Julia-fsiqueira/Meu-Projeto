@@ -9,7 +9,7 @@ def arquivo_existe(nome):
 
 def criar_arquivo(nome):
     try:
-        criar = open(nome, 'wt+')
+        criar = open(nome, 'wr+')
         criar.close()
     except:
         print(f'Houve um erro ao criar o arquivo {nome}')
