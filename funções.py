@@ -1,4 +1,6 @@
 import webbrowser
+from time import sleep
+
 
 def livro():
     l = str(input('Qual livro tu terminou de ler? '))
@@ -10,6 +12,16 @@ def genero():
     return g
 
 
+def mini_menu():
+    print('-' * 20)
+    print('PROJETO')
+    print('-' * 20)
+    print('V - VER LIVROS JÁ LIDOS')
+    print('C - CADASTRAR UM NOVO LIVRO')
+    print('P - PESQUISAR LIVRO PELO ÍNDICE')
+    print('S - SAIR')
+
+
 def titulo(arquivo):
     try:
         abrir_arquivo = open(arquivo, 'at+')
@@ -18,30 +30,13 @@ def titulo(arquivo):
     else:
         try:
             abrir_arquivo.write(f'\n{livro()};{genero()}')
+            abrir_arquivo.close()
         except ValueError:
             print('Houve um erro no registro do título.')
         else:
             print('Novo título registrado!')
             pesquisa(arquivo)
-        finally:
-            abrir_arquivo.close()
     return
-
-
-'''def titulo(arquivo):
-    try:
-        dic = {'Livro': livro(), 'Gênero': genero()}
-        with open(arquivo, 'w') as file:
-            json.dump(dic, file)
-    except:
-        print('Houve um erro no registro do título.')
-    else:
-        print('Novo título adicionado com sucesso.')
-        pergunta = str(input('Quer uma indicação de um similar?[S/N] ')).strip().upper()[0]
-        if pergunta in 'S':
-            print('Vou pesquisar...')
-        else:
-            print('')'''
 
 
 def visualizar_arquivo(nome):
@@ -50,21 +45,14 @@ def visualizar_arquivo(nome):
     except FileNotFoundError:
         print(f'Arquivo {nome} não encotrado.')
     else:
+        indice = 0
         for linha in abrir:
             dados = linha.replace('\n', '').split(';')
+            indice += 1
             print('-' * 20)
-            print(f'Livro: {dados[0]}')
-            print(f'Gênero: {dados[1]}')
+            print(f'{indice}  Livro: {dados[0]} Gênero: {dados[1]}')
     finally:
         abrir.close()
-
-
-'''def visualizar_arquivo(arquivo):
-    try:
-        with open(arquivo, 'r') as read:
-            print(json.load(read))
-    except FileNotFoundError:
-        print(f'Arquivo {arquivo} não encotrado.')'''
 
 
 def pesquisa(arquivo):
@@ -72,24 +60,31 @@ def pesquisa(arquivo):
         f = open(arquivo, 'rt')
         for linha in f:
             dado = linha.split(';')
-            t = dado[-2]
-            g = dado[-1]
     except FileNotFoundError:
         print('ERRO AO VISUALIZAR ARQUIVO')
     else:
         pergunta = str(input('Quer uma indicação de um similar?[S/N] ')).strip().upper()[0]
         if pergunta in 'S':
             print('Vou pesquisar...')
-            webbrowser.open(f'https://www.google.com/search?q=similar+{t}+{g}', new=2)
+            sleep(1.5)
+            webbrowser.open(f'https://www.google.com/search?q=similar+ao+título+{dado[-2]}+gênero+{dado[-1]}', new=2)
         else:
             print('')
 
 
+def pesquisa_indice(arquivo):
+    file = open(arquivo, 'rt')
+    indice = int(input('Qual o índice do livro para pesquisar? '))
+    count = 0
+    try:
+        for linha in file:
+            count += 1
+            if indice == count:
+                dado = linha.replace('\n', '').split(';')
+    except FileNotFoundError:
+        print('ERRO AO VISUALIZAR ARQUIVO')
+    else:
+        print('Vou pesquisar...')
+        sleep(1.5)
+        webbrowser.open(f'https://www.google.com/search?q=similar+ao+título+{dado[0]}+gênero+{dado[1]}', new=2)
 
-def mini_menu():
-    print('-' * 20)
-    print('PROJETO')
-    print('-' * 20)
-    print('V - VER LIVROS JÁ LIDOS')
-    print('C - CADASTRAR UM NOVO LIVRO')
-    print('S - SAIR')

@@ -1,3 +1,4 @@
-perdida;romance
-Encontrada;romance
+Perdida;Romance
+Encontrada;Romance
 Destinado;Romance
+Prometida;Romance

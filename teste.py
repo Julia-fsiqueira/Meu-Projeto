@@ -14,6 +14,8 @@ while True:
             funções.visualizar_arquivo(file)
         elif opcao in 'C':
             novo_livro = funções.titulo(file)
+        elif opcao in 'P':
+            funções.pesquisa_indice(file)
         elif opcao in 'S':
             break
         else:
@@ -24,5 +26,4 @@ while True:
     except KeyboardInterrupt:
         print('\nO usuário não quis continuar o programa')
         break
-
 
