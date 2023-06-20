@@ -3,13 +3,13 @@ from time import sleep
 
 
 def livro():
-    l = str(input('Qual livro tu terminou de ler? '))
-    return l
+    book = str(input('Qual livro tu terminou de ler? '))
+    return book
 
 
 def genero():
-    g = str(input('Gênero: '))
-    return g
+    genres = str(input('Gênero: '))
+    return genres
 
 
 def mini_menu():
@@ -46,11 +46,14 @@ def visualizar_arquivo(nome):
         print(f'Arquivo {nome} não encotrado.')
     else:
         indice = 0
+        print(f'{"  ÍNDICE":<3}', end='')
+        print(f'{"LIVRO":^30}', end='')
+        print(f'{"GÊNERO":>20}')
         for linha in abrir:
             dados = linha.replace('\n', '').split(';')
             indice += 1
-            print('-' * 20)
-            print(f'{indice}  Livro: {dados[0]} Gênero: {dados[1]}')
+            print('-' * 60)
+            print(f'{indice:>5}{dados[0]:^40}{dados[1]:>13}')
     finally:
         abrir.close()
 
@@ -67,16 +70,16 @@ def pesquisa(arquivo):
         if pergunta in 'S':
             print('Vou pesquisar...')
             sleep(1.5)
-            webbrowser.open(f'https://www.google.com/search?q=similar+ao+título+{dado[-2]}+gênero+{dado[-1]}', new=2)
+            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado[-2]}+{dado[-1]}', new=2)
         else:
             print('')
 
 
 def pesquisa_indice(arquivo):
-    file = open(arquivo, 'rt')
-    indice = int(input('Qual o índice do livro para pesquisar? '))
-    count = 0
     try:
+        file = open(arquivo, 'rt')
+        indice = int(input('Qual o índice do livro para pesquisar? '))
+        count = 0
         for linha in file:
             count += 1
             if indice == count:
@@ -86,5 +89,5 @@ def pesquisa_indice(arquivo):
     else:
         print('Vou pesquisar...')
         sleep(1.5)
-        webbrowser.open(f'https://www.google.com/search?q=similar+ao+título+{dado[0]}+gênero+{dado[1]}', new=2)
+        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado[0]}+{dado[1]}', new=2)
 
