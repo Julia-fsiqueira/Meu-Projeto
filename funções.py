@@ -1,15 +1,16 @@
+import json
 import webbrowser
 from time import sleep
 
 
 def livro():
     book = str(input('Qual livro tu terminou de ler? '))
-    return book
+    return f"{book}"
 
 
 def genero():
     genres = str(input('Gênero: '))
-    return genres
+    return f"{genres}"
 
 
 def mini_menu():
@@ -22,72 +23,67 @@ def mini_menu():
     print('S - SAIR')
 
 
-def titulo(arquivo):
+def titulo(var):
     try:
-        abrir_arquivo = open(arquivo, 'at+')
+        with open('banco_de_dados.json', 'rt') as outfile:
+            j = json.load(outfile)
+        j.append(var)
+        with open('banco_de_dados.json', 'wt+') as file:
+            json.dump(j, file, indent=2)
     except FileNotFoundError:
-        print(f'Falha ao executar arquivo {arquivo}.')
+        print('Houve um erro no registro do título.')
     else:
-        try:
-            abrir_arquivo.write(f'\n{livro()};{genero()}')
-            abrir_arquivo.close()
-        except ValueError:
-            print('Houve um erro no registro do título.')
-        else:
-            print('Novo título registrado!')
-            pesquisa(arquivo)
+        print('Novo título registrado!')
+        pesquisa(var)
     return
 
 
 def visualizar_arquivo(nome):
     try:
-        abrir = open(nome, 'rt')
+        with open(nome, 'rt') as outfile:
+            j = json.load(outfile)
     except FileNotFoundError:
         print(f'Arquivo {nome} não encotrado.')
     else:
         indice = 0
-        print(f'{"  ÍNDICE":<3}', end='')
+        print(f'{" ÍNDICE":<3}', end='')
         print(f'{"LIVRO":^30}', end='')
         print(f'{"GÊNERO":>20}')
-        for linha in abrir:
-            dados = linha.replace('\n', '').split(';')
+        for linha in j:
             indice += 1
-            print('-' * 60)
-            print(f'{indice:>5}{dados[0]:^40}{dados[1]:>13}')
-    finally:
-        abrir.close()
+            print(f'   {indice:<2} {linha["Livro"]:^35} {linha["Gênero"]:>15}')
 
 
-def pesquisa(arquivo):
+def pesquisa(var):
     try:
-        f = open(arquivo, 'rt')
-        for linha in f:
-            dado = linha.split(';')
-    except FileNotFoundError:
-        print('ERRO AO VISUALIZAR ARQUIVO')
+        dado_1 = var['Livro']
+        dado_2 = var['Gênero']
+    except ModuleNotFoundError:
+        print('ERRO AO PESQUISAR TÍTULO')
     else:
         pergunta = str(input('Quer uma indicação de um similar?[S/N] ')).strip().upper()[0]
         if pergunta in 'S':
             print('Vou pesquisar...')
             sleep(1.5)
-            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado[-2]}+{dado[-1]}', new=2)
+            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado_1}+{dado_2}', new=2)
         else:
             print('')
 
 
 def pesquisa_indice(arquivo):
     try:
-        file = open(arquivo, 'rt')
+        with open(arquivo, 'rt') as outfile:
+            j = json.load(outfile)
         indice = int(input('Qual o índice do livro para pesquisar? '))
         count = 0
-        for linha in file:
+        for linha in j:
             count += 1
             if indice == count:
-                dado = linha.replace('\n', '').split(';')
+                dados_1 = linha["Livro"]
+                dados_2 = linha["Gênero"]
     except FileNotFoundError:
         print('ERRO AO VISUALIZAR ARQUIVO')
     else:
         print('Vou pesquisar...')
         sleep(1.5)
-        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado[0]}+{dado[1]}', new=2)
-
+        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}', new=2)
