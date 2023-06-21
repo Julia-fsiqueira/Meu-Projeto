@@ -1,7 +1,7 @@
 import arquivo
 import funções
 
-file = 'banco.json'
+file = 'banco_de_dados.json'
 if arquivo.arquivo_existe(file):
     print('AGUARDE...')
 else:
