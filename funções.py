@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 import webbrowser
 from time import sleep
 
@@ -38,7 +39,7 @@ def titulo(var):
     return
 
 
-def visualizar_arquivo(nome):
+'''def visualizar_arquivo(nome):
     try:
         with open(nome, 'rt') as outfile:
             j = json.load(outfile)
@@ -51,7 +52,14 @@ def visualizar_arquivo(nome):
         print(f'{"GÊNERO":>20}')
         for linha in j:
             indice += 1
-            print(f'   {indice:<2} {linha["Livro"]:^35} {linha["Gênero"]:>15}')
+            print(f'   {indice:<2} {linha["Livro"]:^35} {linha["Gênero"]:>15}')'''
+
+
+def visualizacao_arquivo():
+    try:
+        print(pd.read_json('banco_de_dados.json', orient='records'))
+    except FileNotFoundError:
+        print('ARQUIVO NÃO ENCONTRADO')
 
 
 def pesquisa(var):

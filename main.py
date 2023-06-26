@@ -11,7 +11,7 @@ while True:
         funções.mini_menu()
         opcao = str(input('Opção desejada: ')).strip().upper()[0]
         if opcao in 'V':
-            funções.visualizar_arquivo(file)
+            funções.visualizacao_arquivo()
         elif opcao in 'C':
             novo_livro = {
                 "Livro": funções.livro(),
