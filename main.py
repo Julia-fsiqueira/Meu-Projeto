@@ -20,6 +20,8 @@ while True:
             funções.titulo(novo_livro)
         elif opcao in 'P':
             funções.pesquisa_indice(file)
+        elif opcao in 'D':
+            funções.deleta_título(file)
         elif opcao in 'S':
             break
         else:
