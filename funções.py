@@ -21,38 +21,23 @@ def mini_menu():
     print('V - VER LIVROS JÁ LIDOS')
     print('C - CADASTRAR UM NOVO LIVRO')
     print('P - PESQUISAR LIVRO PELO ÍNDICE')
+    print('D - DELETAR UM TÍTULO JÁ CADASTRADO')
     print('S - SAIR')
 
 
 def titulo(var):
     try:
         with open('banco_de_dados.json', 'rt') as outfile:
-            j = json.load(outfile)
-        j.append(var)
+            data = json.load(outfile)
+        data.append(var)
         with open('banco_de_dados.json', 'wt+') as file:
-            json.dump(j, file, indent=2)
+            json.dump(data, file, indent=2)
     except FileNotFoundError:
         print('Houve um erro no registro do título.')
     else:
         print('Novo título registrado!')
         pesquisa(var)
     return
-
-
-'''def visualizar_arquivo(nome):
-    try:
-        with open(nome, 'rt') as outfile:
-            j = json.load(outfile)
-    except FileNotFoundError:
-        print(f'Arquivo {nome} não encotrado.')
-    else:
-        indice = 0
-        print(f'{" ÍNDICE":<3}', end='')
-        print(f'{"LIVRO":^30}', end='')
-        print(f'{"GÊNERO":>20}')
-        for linha in j:
-            indice += 1
-            print(f'   {indice:<2} {linha["Livro"]:^35} {linha["Gênero"]:>15}')'''
 
 
 def visualizacao_arquivo():
@@ -81,17 +66,31 @@ def pesquisa(var):
 def pesquisa_indice(arquivo):
     try:
         with open(arquivo, 'rt') as outfile:
-            j = json.load(outfile)
+            data = json.load(outfile)
         indice = int(input('Qual o índice do livro para pesquisar? '))
         count = 0
-        for linha in j:
-            count += 1
+        for linha in data:
             if indice == count:
                 dados_1 = linha["Livro"]
                 dados_2 = linha["Gênero"]
+            count += 1
     except FileNotFoundError:
         print('ERRO AO VISUALIZAR ARQUIVO')
     else:
         print('Vou pesquisar...')
         sleep(1.5)
         webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}', new=2)
+
+
+def deleta_título(arquivo):
+    try:
+        with open(arquivo, 'rt') as outfile:
+            data = json.load(outfile)
+        indice = int(input('Qual o índice do título para deletar? '))
+        data.pop(indice)
+        with open(arquivo, 'wt') as file:
+            json.dump(data, file, indent=2)
+    except FileNotFoundError:
+        print('ERRO AO DELETAR TÍTULO DO ARQUIVO')
+    else:
+        print('TÍTULO DELETADO COM SUCESSO')
