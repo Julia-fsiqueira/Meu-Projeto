@@ -21,6 +21,7 @@ def mini_menu():
     print('V - VER LIVROS JÁ LIDOS')
     print('C - CADASTRAR UM NOVO LIVRO')
     print('P - PESQUISAR LIVRO PELO ÍNDICE')
+    print('A - ATUALIZAR UM TÍTULO JÁ CADASTRADO')
     print('D - DELETAR UM TÍTULO JÁ CADASTRADO')
     print('S - SAIR')
 
@@ -94,3 +95,23 @@ def deleta_título(arquivo):
         print('ERRO AO DELETAR TÍTULO DO ARQUIVO')
     else:
         print('TÍTULO DELETADO COM SUCESSO')
+
+
+def atualiza_titulo(arquivo):
+    try:
+        with open(arquivo, 'rt') as outfile:
+            data = json.load(outfile)
+        indice = int(input('Qual o índice do título para atualizar? '))
+        print(data[indice])
+        book = str(input('Livro: '))
+        genre = str(input('Gênero: '))
+        atualizado = {"Livro": book, "Gênero": genre}
+    except FileNotFoundError:
+        print('OCORREU UM ERRO')
+    else:
+        data.pop(indice)
+        data.insert(indice, atualizado)
+        with open(arquivo, 'wt') as file:
+            json.dump(data, file, indent=2)
+        print('TÍTULO ATUALIZADO COM SUCESSO')
+
