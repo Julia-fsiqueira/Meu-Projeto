@@ -15,7 +15,8 @@ while True:
         elif opcao in 'C':
             novo_livro = {
                 "Livro": funções.livro(),
-                "Gênero": funções.genero()
+                "Gênero": funções.genero(),
+                "Gênero I": funções.genero()
             }
             funções.titulo(novo_livro)
         elif opcao in 'P':
