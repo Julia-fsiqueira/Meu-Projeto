@@ -24,8 +24,9 @@ while True:
         elif opcao in 'A':
             funções.atualiza_titulo(file)
         elif opcao in 'D':
-            funções.deleta_título(file)
+            funções.deleta_titulo(file)
         elif opcao in 'S':
+            print(f'{"FIM. VOLTE SEMPRE":^40}')
             break
         else:
             print('Tente novamente.')

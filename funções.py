@@ -15,9 +15,9 @@ def genero():
 
 
 def mini_menu():
-    print('-' * 20)
+    linhas()
     print('PROJETO')
-    print('-' * 20)
+    linhas()
     print('V - VER LIVROS JÁ LIDOS')
     print('C - CADASTRAR UM NOVO LIVRO')
     print('P - PESQUISAR LIVRO PELO ÍNDICE')
@@ -26,13 +26,16 @@ def mini_menu():
     print('S - SAIR')
 
 
+def linhas():
+    print('-' * 40)
+
+
 def titulo(var):
     try:
+        linhas()
         with open('banco_de_dados.json', 'rt') as outfile:
             data = json.load(outfile)
         data.append(var)
-        with open('banco_de_dados.json', 'wt+') as file:
-            json.dump(data, file, indent=2)
     except FileNotFoundError:
         print('Houve um erro no registro do título.')
     else:
@@ -43,6 +46,7 @@ def titulo(var):
 
 def visualizacao_arquivo():
     try:
+        linhas()
         print(pd.read_json('banco_de_dados.json', orient='records'))
     except FileNotFoundError:
         print('ARQUIVO NÃO ENCONTRADO')
@@ -50,6 +54,7 @@ def visualizacao_arquivo():
 
 def pesquisa(var):
     try:
+        linhas()
         dado_1 = var['Livro']
         dado_2 = var['Gênero']
         dado_3 = var['Gênero I']
@@ -67,6 +72,7 @@ def pesquisa(var):
 
 def pesquisa_indice(arquivo):
     try:
+        linhas()
         with open(arquivo, 'rt') as outfile:
             data = json.load(outfile)
         indice = int(input('Qual o índice do livro para pesquisar? '))
@@ -85,8 +91,9 @@ def pesquisa_indice(arquivo):
         webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}+{dados_3}', new=2)
 
 
-def deleta_título(arquivo):
+def deleta_titulo(arquivo):
     try:
+        linhas()
         with open(arquivo, 'rt') as outfile:
             data = json.load(outfile)
         indice = int(input('Qual o índice do título para deletar? '))
@@ -101,6 +108,7 @@ def deleta_título(arquivo):
 
 def atualiza_titulo(arquivo):
     try:
+        linhas()
         with open(arquivo, 'rt') as outfile:
             data = json.load(outfile)
         indice = int(input('Qual o índice do título para atualizar? '))
