@@ -17,7 +17,7 @@ while True:
                 "Livro": funções.livro(),
                 "Gênero": [funções.genero(), funções.genero()]
             }
-            pergunta = str(input('Quer adicionar outro gênero? [S/N] ')).strip().upper()[0]
+            pergunta = str(input('Quer adicionar outro gênero?[S/N] ')).strip().upper()[0]
             if pergunta in 'S':
                 novo_livro["Gênero"].append(funções.genero())
             funções.titulo(novo_livro)

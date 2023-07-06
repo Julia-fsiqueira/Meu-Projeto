@@ -104,7 +104,7 @@ def atualiza_titulo(arquivo):
         indice = int(input('Qual o índice do título para atualizar? '))
         print(data[indice])
         book = str(input('Livro: '))
-        genre = str(input('Gênero: [USE VÍRGULA PARA SEPARAR] '))
+        genre = str(input('Gênero:[USE VÍRGULA PARA SEPARAR] '))
         atualizado = {"Livro": book, "Gênero": [genre]}
     except FileNotFoundError:
         print('OCORREU UM ERRO')
