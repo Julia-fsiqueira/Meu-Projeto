@@ -15,11 +15,9 @@ while True:
         elif opcao in 'C':
             novo_livro = {
                 "Livro": funções.livro(),
-                "Gênero": [funções.genero(), funções.genero()]
+                "Gênero": funções.genero(),
+                "Gênero I": funções.genero()
             }
-            pergunta = str(input('Quer adicionar outro gênero?[S/N] ')).strip().upper()[0]
-            if pergunta in 'S':
-                novo_livro["Gênero"].append(funções.genero())
             funções.titulo(novo_livro)
         elif opcao in 'P':
             funções.pesquisa_indice(file)
@@ -28,6 +26,7 @@ while True:
         elif opcao in 'D':
             funções.deleta_titulo(file)
         elif opcao in 'S':
+            print(f'{"FIM. VOLTE SEMPRE":^40}')
             break
         else:
             print('Tente novamente.')

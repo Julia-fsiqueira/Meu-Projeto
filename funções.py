@@ -16,7 +16,7 @@ def genero():
 
 def mini_menu():
     linhas()
-    print(f"{'PROJETO':^40}")
+    print('PROJETO')
     linhas()
     print('V - VER LIVROS JÁ LIDOS')
     print('C - CADASTRAR UM NOVO LIVRO')
@@ -57,6 +57,7 @@ def pesquisa(var):
         linhas()
         dado_1 = var['Livro']
         dado_2 = var['Gênero']
+        dado_3 = var['Gênero I']
     except ModuleNotFoundError:
         print('ERRO AO PESQUISAR TÍTULO')
     else:
@@ -64,7 +65,7 @@ def pesquisa(var):
         if pergunta in 'S':
             print('Vou pesquisar...')
             sleep(1.5)
-            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado_1}+{dado_2}', new=2)
+            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado_1}+{dado_2}+{dado_3}', new=2)
         else:
             print('')
 
@@ -80,13 +81,14 @@ def pesquisa_indice(arquivo):
             if indice == count:
                 dados_1 = linha["Livro"]
                 dados_2 = linha["Gênero"]
+                dados_3 = linha["Gênero I"]
             count += 1
     except FileNotFoundError:
         print('ERRO AO VISUALIZAR ARQUIVO')
     else:
         print('Vou pesquisar...')
         sleep(1.5)
-        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}', new=2)
+        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}+{dados_3}', new=2)
 
 
 def deleta_titulo(arquivo):
@@ -112,8 +114,8 @@ def atualiza_titulo(arquivo):
         indice = int(input('Qual o índice do título para atualizar? '))
         print(data[indice])
         book = str(input('Livro: '))
-        genre = str(input('Gênero:[USE VÍRGULA PARA SEPARAR] '))
-        atualizado = {"Livro": book, "Gênero": [genre]}
+        genre = str(input('Gênero: '))
+        atualizado = {"Livro": book, "Gênero": genre, "Gênero I": genre}
     except FileNotFoundError:
         print('OCORREU UM ERRO')
     else:
