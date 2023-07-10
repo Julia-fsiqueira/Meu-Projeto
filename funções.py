@@ -83,7 +83,7 @@ def pesquisa_indice(arquivo):
         webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}', new=2)
 
 
-def deleta_título(arquivo):
+def deleta_titulo(arquivo):
     try:
         with open(arquivo, 'rt') as outfile:
             data = json.load(outfile)

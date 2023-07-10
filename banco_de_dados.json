@@ -10,5 +10,29 @@
   {
     "Livro": "Cronicas de Narnia",
     "G\u00eanero": "Fantasia"
+  },
+  {
+    "Livro": "Livro1",
+    "G\u00eanero": "Genero1"
+  },
+  {
+    "Livro": "Livro2",
+    "G\u00eanero": "Genero2"
+  },
+  {
+    "Livro": "Livro3",
+    "G\u00eanero": "Genero3"
+  },
+  {
+    "Livro": "Livro4",
+    "G\u00eanero": [
+      "Genero4",
+      "Genero5"
+    ]
+  },
+  {
+    "Livro": "Livro5",
+    "G\u00eanero": "Genero5",
+    "G\u00eanero I": "Genero6"
   }
 ]

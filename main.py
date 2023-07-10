@@ -26,7 +26,7 @@ while True:
         elif opcao in 'A':
             funções.atualiza_titulo(file)
         elif opcao in 'D':
-            funções.deleta_título(file)
+            funções.deleta_titulo(file)
         elif opcao in 'S':
             break
         else:
