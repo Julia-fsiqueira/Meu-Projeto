@@ -10,19 +10,5 @@
   {
     "Livro": "Cronicas de Narnia",
     "G\u00eanero": "Fantasia"
-  },
-  {
-    "Livro": "Livro1",
-    "G\u00eanero": [
-      "Genero1",
-      "Genero2",
-      "Genero3"
-    ]
-  },
-  {
-    "Livro": "Livro2",
-    "G\u00eanero": [
-      "Genero2"
-    ]
   }
 ]

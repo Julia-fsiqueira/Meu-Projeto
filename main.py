@@ -20,11 +20,11 @@ while True:
             }
             funções.titulo(novo_livro)
         elif opcao in 'P':
-            funções.pesquisa_indice()
+            funções.pesquisa_indice(file)
         elif opcao in 'A':
-            funções.atualiza_titulo()
+            funções.atualiza_titulo(file)
         elif opcao in 'D':
-            funções.deleta_titulo()
+            funções.deleta_titulo(file)
         elif opcao in 'S':
             print(f'{"FIM. VOLTE SEMPRE":^40}')
             break
