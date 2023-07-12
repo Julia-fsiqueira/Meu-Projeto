@@ -16,11 +16,11 @@ def genero():
 
 def mini_menu():
     linhas()
-    print('PROJETO')
+    print(f'{"PROJETO":^40}')
     linhas()
-    print('V - VER LIVROS JÁ LIDOS')
-    print('C - CADASTRAR UM NOVO LIVRO')
-    print('P - PESQUISAR LIVRO PELO ÍNDICE')
+    print('V - VER TÍTULOS JÁ LIDOS')
+    print('C - CADASTRAR UM NOVO TÍTULO')
+    print('P - PESQUISAR TÍTULO PELO ÍNDICE')
     print('A - ATUALIZAR UM TÍTULO JÁ CADASTRADO')
     print('D - DELETAR UM TÍTULO JÁ CADASTRADO')
     print('S - SAIR')
@@ -55,8 +55,8 @@ def visualizacao_arquivo():
 def pesquisa(var):
     try:
         linhas()
-        dado_1 = var['Livro']
-        dado_2 = var['Gênero']
+        book = var['Livro']
+        genre = var['Gênero']
     except ModuleNotFoundError:
         print('ERRO AO PESQUISAR TÍTULO')
     else:
@@ -64,12 +64,12 @@ def pesquisa(var):
         if pergunta in 'S':
             print('Vou pesquisar...')
             sleep(1.5)
-            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dado_1}+{dado_2}', new=2)
+            webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{book}+{genre}', new=2)
         else:
             print('')
 
 
-def pesquisa_indice(arquivo):
+def pesquisa_indice():
     try:
         linhas()
         data = le_arquivo()
@@ -77,18 +77,18 @@ def pesquisa_indice(arquivo):
         count = 0
         for linha in data:
             if indice == count:
-                dados_1 = linha["Livro"]
-                dados_2 = linha["Gênero"]
+                book = linha["Livro"]
+                genre = linha["Gênero"]
             count += 1
     except FileNotFoundError:
         print('ERRO AO VISUALIZAR ARQUIVO')
     else:
         print('Vou pesquisar...')
         sleep(1.5)
-        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{dados_1}+{dados_2}', new=2)
+        webbrowser.open(f'https://www.google.com/search?q=similares+do+livro+{book}+{genre}', new=2)
 
 
-def deleta_titulo(arquivo):
+def deleta_titulo():
     try:
         linhas()
         data = le_arquivo()
@@ -101,7 +101,7 @@ def deleta_titulo(arquivo):
         print('TÍTULO DELETADO COM SUCESSO')
 
 
-def atualiza_titulo(arquivo):
+def atualiza_titulo():
     try:
         linhas()
         data = le_arquivo()
