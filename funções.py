@@ -33,9 +33,9 @@ def linhas():
 def titulo(var):
     try:
         linhas()
-        with open('banco_de_dados.json', 'rt') as outfile:
-            data = json.load(outfile)
+        data = le_arquivo()
         data.append(var)
+        escreve_arquivo(data)
     except FileNotFoundError:
         print('Houve um erro no registro do título.')
     else:
@@ -72,8 +72,7 @@ def pesquisa(var):
 def pesquisa_indice(arquivo):
     try:
         linhas()
-        with open(arquivo, 'rt') as outfile:
-            data = json.load(outfile)
+        data = le_arquivo()
         indice = int(input('Qual o índice do livro para pesquisar? '))
         count = 0
         for linha in data:
@@ -92,12 +91,10 @@ def pesquisa_indice(arquivo):
 def deleta_titulo(arquivo):
     try:
         linhas()
-        with open(arquivo, 'rt') as outfile:
-            data = json.load(outfile)
+        data = le_arquivo()
         indice = int(input('Qual o índice do título para deletar? '))
         data.pop(indice)
-        with open(arquivo, 'wt') as file:
-            json.dump(data, file, indent=2)
+        escreve_arquivo(data)
     except FileNotFoundError:
         print('ERRO AO DELETAR TÍTULO DO ARQUIVO')
     else:
@@ -107,8 +104,7 @@ def deleta_titulo(arquivo):
 def atualiza_titulo(arquivo):
     try:
         linhas()
-        with open(arquivo, 'rt') as outfile:
-            data = json.load(outfile)
+        data = le_arquivo()
         indice = int(input('Qual o índice do título para atualizar? '))
         print(data[indice])
         book = str(input('Livro: '))
@@ -119,7 +115,23 @@ def atualiza_titulo(arquivo):
     else:
         data.pop(indice)
         data.insert(indice, atualizado)
-        with open(arquivo, 'wt') as file:
-            json.dump(data, file, indent=2)
+        escreve_arquivo(data)
         print('TÍTULO ATUALIZADO COM SUCESSO')
 
+
+def escreve_arquivo(var):
+    try:
+        with open('banco_de_dados.json', 'wt+') as file:
+            json.dump(var, file, indent=2)
+    except FileNotFoundError:
+        print('Arquivo não encontrado')
+
+
+def le_arquivo():
+    try:
+        with open('banco_de_dados.json') as outfile:
+            data = json.load(outfile)
+    except FileNotFoundError:
+        print('Arquivo não encontrado')
+    else:
+        return data
